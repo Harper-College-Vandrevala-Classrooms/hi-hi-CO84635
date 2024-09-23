@@ -1,0 +1,3 @@
+C:/Users/blake/Documents/Github/hi-hi-CO84635/cmake-build-debug/CMakeFiles/hi_hi_CO84635.dir
+C:/Users/blake/Documents/Github/hi-hi-CO84635/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/blake/Documents/Github/hi-hi-CO84635/cmake-build-debug/CMakeFiles/rebuild_cache.dir
