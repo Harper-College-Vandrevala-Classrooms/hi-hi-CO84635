@@ -32,7 +32,7 @@ int strcmp_case_insensitive(string string_1, string string_2) {
 }
 
 int main () {
-
+    
     assert(strcmp_case_insensitive("coffee", "coffee") == 0);
     assert(strcmp_case_insensitive("water", "water") == 0);
     assert(strcmp_case_insensitive("milk", "milk") == 0);
