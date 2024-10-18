@@ -6,19 +6,25 @@
 
 using namespace std;
 
-int strcmp_case_insensitive(string string_1, string string_2) {
+int strcmp_case_insensitive(string string_1, string string_2, bool skip_spaces = false) {
     char cStringOne[string_1.length() + 1];
     char cStringTwo[string_2.length() + 1];
 
+    int indexOne = 0;
     for (int i = 0; i < string_1.length(); i++) {
-        cStringOne[i] = tolower(string_1[i]);
+        if (!(skip_spaces && string_1[i] == ' ')) {
+            cStringOne[indexOne++] = tolower(string_1[i]);
+        }
     }
-    cStringOne[string_1.length()] = '\0';
+    cStringOne[indexOne] = '\0';
 
+    int indexTwo = 0;
     for (int i = 0; i < string_2.length(); i++) {
-        cStringTwo[i] = tolower(string_2[i]);
+        if (!(skip_spaces && string_2[i] == ' ')) {
+            cStringTwo[indexTwo++] = tolower(string_2[i]);
+        }
     }
-    cStringTwo[string_2.length()] = '\0';
+    cStringTwo[indexTwo] = '\0';
 
     int result = strcmp(cStringOne, cStringTwo);
 
@@ -32,7 +38,16 @@ int strcmp_case_insensitive(string string_1, string string_2) {
 }
 
 int main () {
-    
+    assert(strcmp_case_insensitive("my cool string", "mycoolstring", true) == 0);
+    assert(strcmp_case_insensitive("My Cool String", "MyCoolString", true) == 0);
+    assert(strcmp_case_insensitive("My Cool String", "mycoolstring", true) == 0);
+    assert(strcmp_case_insensitive("My Cool String ", "mycoolstring", true) == 0);
+    assert(strcmp_case_insensitive(" My Cool String", "mycoolstring", true) == 0);
+    assert(strcmp_case_insensitive("Another string", "mycoolstring", true) != 0);
+
+    assert(strcmp_case_insensitive("coffee", "coffee") == 0);
+    assert(strcmp_case_insensitive("Coffee ", "coffee") != 0);
+
     assert(strcmp_case_insensitive("coffee", "coffee") == 0);
     assert(strcmp_case_insensitive("water", "water") == 0);
     assert(strcmp_case_insensitive("milk", "milk") == 0);
@@ -71,6 +86,13 @@ int main () {
     assert(strcmp_case_insensitive("Coding", "CoDING") == 0);
     assert(strcmp_case_insensitive("Hello World", "hello world") == 0);
 
+    assert(strcmp_case_insensitive("A", "a") == 0); 
+    assert(strcmp_case_insensitive("abc", "xyz") == -1);
+    assert(strcmp_case_insensitive("   ", "   ") == 0);
+    assert(strcmp_case_insensitive("Hello@World", "hello@world") == 0);
+
     assert(strcmp_case_insensitive("pneumonoultramicroscopicsilicovolcanoconiosis", "pneumonoultramicroscopicsilicovolcanoconiosis") == 0);
+    
+    cout << "All of the test passed!" << endl;
     return 0;
 }
